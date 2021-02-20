@@ -15,7 +15,7 @@ const Pagination: React.FC<IPaginationProps> = (props) => {
     });
   };
   const onPrev = () => {
-    if (pagination.page <= 0) return;
+    if (pagination.page <= 1) return;
     setPagination((old) => {
       return {
         ...old,
@@ -25,7 +25,7 @@ const Pagination: React.FC<IPaginationProps> = (props) => {
   };
   return (
     <div>
-      <button onClick={onPrev} disabled={pagination.page === 0}>
+      <button onClick={onPrev} disabled={pagination.page === 1}>
         prev
       </button>
       <button onClick={onNext}>next</button>
