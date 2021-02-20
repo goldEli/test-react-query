@@ -1,13 +1,13 @@
 import React from "react";
 import { useQuery } from "react-query";
-import { fetchTodoList } from "src/api";
+import { fetchTodoList, TODO_LIST } from "src/api";
 import { ITodoItem } from "src/type";
 import TodoItem from "../TodoItem";
 
 interface ITodoListProps {}
 
 const TodoList: React.FC<ITodoListProps> = (props) => {
-  const { data } = useQuery<ITodoItem[]>("todolist", fetchTodoList);
+  const { data } = useQuery<ITodoItem[]>(TODO_LIST, fetchTodoList);
   return (
     <ul>
       {data?.map((item, idx) => {

@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
+import React from "react";
 import { useQueryClient, useMutation } from "react-query";
-import { addTodoItem } from "src/api";
+import { addTodoItem, TODO_LIST } from "src/api";
 
 interface IAddTodoItemProps {}
 
@@ -10,11 +10,9 @@ const AddTodoItem: React.FC<IAddTodoItemProps> = (props) => {
   const mutation = useMutation(addTodoItem, {
     onSuccess: () => {
       setInputVal("");
-      queryClient.invalidateQueries("todolist");
+      queryClient.invalidateQueries(TODO_LIST);
     },
   });
-  // const queryClient = useQueryClient();
-  // queryClient.invalidateQueries("todolist");
   const onAdd = () => {
     mutation.mutate(inputVal);
   };
