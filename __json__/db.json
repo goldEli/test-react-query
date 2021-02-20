@@ -71,11 +71,6 @@
       "id": 16
     },
     {
-      "content": "00",
-      "completed": false,
-      "id": 17
-    },
-    {
       "content": "aa",
       "completed": false,
       "id": 18
@@ -102,7 +97,7 @@
     },
     {
       "content": "qq",
-      "completed": false,
+      "completed": true,
       "id": 23
     }
   ]
