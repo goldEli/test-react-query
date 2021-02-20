@@ -5,7 +5,11 @@ import { http } from "src/utils/http";
 export const TODO_LIST = "todolist";
 
 export const fetchTodoList = () => {
-  return http(TODO_LIST);
+  return http(`${TODO_LIST}`);
+};
+
+export const fetchTodoListByPage = (page: number, limit: number) => {
+  return http(`${TODO_LIST}?_page=${page}&_limit=${limit}`);
 };
 
 export const addTodoItem = (content: string) => {
@@ -19,7 +23,6 @@ export const addTodoItem = (content: string) => {
 };
 
 export const delTodoItem = (id: string) => {
-  console.log(id);
   return http(`${TODO_LIST}/${id}`, {
     method: "DELETE",
   });

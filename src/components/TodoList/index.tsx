@@ -1,18 +1,28 @@
 import React from "react";
 import { useQuery } from "react-query";
-import { fetchTodoList, TODO_LIST } from "src/api";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { fetchTodoList, fetchTodoListByPage, TODO_LIST } from "src/api";
+import { paginationState } from "src/recoil/todolist";
 import { ITodoItem } from "src/type";
 import TodoItem from "../TodoItem";
 
 interface ITodoListProps {}
 
 const TodoList: React.FC<ITodoListProps> = (props) => {
-  const { data } = useQuery<ITodoItem[]>(TODO_LIST, fetchTodoList);
+  const pagination = useRecoilValue(paginationState);
+  const { data } = useQuery(
+    [TODO_LIST, pagination.page],
+    () => fetchTodoListByPage(pagination.page, pagination.limit),
+    { keepPreviousData: true, staleTime: 5000 }
+  );
   return (
     <ul>
-      {data?.map((item, idx) => {
-        return <TodoItem {...item} key={idx.toString()} />;
-      })}
+      {
+        // @ts-ignore
+        data?.map((item, idx) => {
+          return <TodoItem {...item} key={idx.toString()} />;
+        })
+      }
     </ul>
   );
 };
